@@ -1,0 +1,18 @@
+# Python essentials
+__pycache__/
+*.pyc
+*.pyo
+venv/
+env/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Godot cache
+FPUT_extra_applications/FPUT_waves/.godot/
+FPUT_extra_applications/FPUT_waves/.import/
