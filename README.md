@@ -2,7 +2,7 @@
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![DOI](https://doi.org/10.1016/j.physd.2025.134813)
+[![DOI](https://img.shields.io/badge/DOI-10.1016%2Fj.jcp.2025.113456-blue.svg)](https://doi.org/10.1016/j.physd.2025.134813)
 
 A comprehensive computational framework for the analysis of the **Fermi-Pasta-Ulam-Tsingou (FPUT) nonlinear lattice system**, featuring symplectic integration, normal form transformations, and Lyapunov exponent calculations.
 
@@ -159,30 +159,30 @@ python quick_LE_plotter_v02.py
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                   FPUT Framework                         │
+│                   FPUT Framework                        │
 ├─────────────────────────────────────────────────────────┤
-│                                                          │
+│                                                         │
 │  [Initial Conditions] ──┐                               │
 │                         │                               │
 │                         ├──► [Tensor Pre-computation]   │
 │                         │     (OPT_tensors_calculator)  │
 │                         │                               │
 │                         └──► [Evolution Method Choice]  │
-│                                      │                   │
+│                                      │                  │
 │                         ┌────────────┴────────────┐     │
 │                         │                         │     │
 │                    [q-space]                 [a-space]  │
 │                  (Symplectic)            (RK4 + Tensors)│
 │                         │                         │     │
 │                         └────────────┬────────────┘     │
-│                                      │                   │
+│                                      │                  │
 │                            [Lyapunov Analysis]          │
-│                              (Clone Method)              │
-│                                      │                   │
+│                              (Clone Method)             │
+│                                      │                  │
 │                         ┌────────────┴────────────┐     │
 │                         │                         │     │
 │                  [Visualization]          [Data Export] │
-│                                                          │
+│                                                         │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -246,13 +246,12 @@ delta3_type2 = d.delta_k(k, n=3, resonance_type=2)  # For +ω₁ +ω₂ -ω₃
 **Mathematical Background**:
 The FPUT Hamiltonian in normal coordinates is:
 ```
-H = H₀ + H₃ + H₄ + H₅ + ...
+H = H₀ + H₃ + H₄
 ```
 where:
 - **H₀**: Linear oscillator energy
 - **H₃**: Triad (3-wave) interactions ∝ α (quadratic nonlinearity)
 - **H₄**: Quartet (4-wave) interactions ∝ β (cubic nonlinearity)
-- **H₅**: Quintet (5-wave) interactions (from α² and αβ)
 
 **Near-Identity Transformations**:
 The code implements canonical transformations:
@@ -566,9 +565,9 @@ python quick_LE_plotter_v02.py
        │            │ (loads tensors)
        ▼            ▼
 [LE_with_pure_sympl_q_evolution.py] ◄──┐
-       │                                │
-       │ (runs simulation)              │
-       │                                │
+       │                               │
+       │ (runs simulation)             │
+       │                               │
        ├──► [test_FPUT_recurrence_LE.py]
        │            │
        │            │ (analyzes recurrence)
@@ -731,7 +730,7 @@ a0[1:] = (np.random.rand(N-1) + 1j*np.random.rand(N-1)) * delta
                    Fermi-Pasta-Ulam-Tsingou System Analysis}},
   year         = {2025},
   publisher    = {GitHub},
-  url          = {https://github.com/[username]/fput-research-framework},
+  url          = {https://github.com/mlot/fput-research-framework},
   note         = {Accessed: [Date]}
 }
 ```
@@ -753,7 +752,7 @@ author = {Tiziana Comito and Matteo Lotriglia and Miguel D. Bustamante}
 ### Citation in Publications
 
 **Example acknowledgment text:**
-> "Numerical simulations were performed using the FPUT Research Framework developed by Lotriglia et al. (2025) [cite software]. The framework implements high-order symplectic integrators and tensor-based perturbation theory for the analysis of the Fermi-Pasta-Ulam-Tsingou system."
+> "Numerical simulations were performed using the FPUT Research Framework developed by Lotriglia, Comito, Bustamante (2025) [cite software]. The framework implements high-order symplectic integrators and tensor-based perturbation theory for the analysis of the Fermi-Pasta-Ulam-Tsingou system."
 
 ### Non-Academic Use
 
