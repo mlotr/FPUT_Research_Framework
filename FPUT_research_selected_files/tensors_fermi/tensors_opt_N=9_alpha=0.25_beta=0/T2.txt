@@ -1,0 +1,2 @@
+Shape: (9, 9, 9, 9)
+Non-zero entries (indices: value):

@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://085ek0gdwbfx"]
+
+[ext_resource type="Shader" path="res://wave_sh.gdshader" id="1_hvxvn"]
+[ext_resource type="Script" path="res://mesh_instance3D.gd" id="1_qjqev"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dlfvq"]
+render_priority = 0
+shader = ExtResource("1_hvxvn")
+shader_parameter/amplitude = 0.5
+shader_parameter/mesh_width = 10.0
+shader_parameter/wave_positions = null
+shader_parameter/wave_speeds = null
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ah36m"]
+material = SubResource("ShaderMaterial_dlfvq")
+size = Vector2(10, 10)
+subdivide_width = 128
+subdivide_depth = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8r4cu"]
+size = Vector3(10, 1, 10)
+
+[node name="Main" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_ah36m")
+script = ExtResource("1_qjqev")
+alpha_non_linear = 1.0
+beta_non_linear = 0.25
+dt = 0.1
+elastic_constant = 1.0
+impulse_strength = 3.0
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_8r4cu")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, -5.2318e-16, 3.02058e-16, 3.02058e-16, 0.866025, 0.5, -5.2318e-16, -0.5, 0.866025, 2.08165e-12, 5, 10)
+current = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 2.4663e-16, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0, 0)
