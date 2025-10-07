@@ -19,6 +19,7 @@ A comprehensive computational framework for the analysis of the **Fermi-Pasta-Ul
 - [File Descriptions](#file-descriptions)
 - [Interconnections Between Files](#interconnections-between-files)
 - [Example Results](#example-results)
+- [Extended Applications](#extended-applications)
 - [Advanced Configuration](#advanced-configuration)
 - [Troubleshooting](#troubleshooting)
 - [Theoretical References](#theoretical-references)
