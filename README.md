@@ -636,6 +636,194 @@ python quick_LE_plotter_v02.py  # Edit file_path
 
 ---
 
+## 🌐 Extended Applications
+
+Beyond the core FPUT lattice research, this repository includes two practical applications demonstrating the versatility of nonlinear dynamics concepts in different domains.
+
+### 📈 FPUT Finance Application
+
+**Location**: `FPUT_extra_applications/FPUT_finance/`
+
+An experimental application of Lyapunov spectrum analysis to financial portfolio dynamics using Vector Autoregressive (VAR) models.
+
+#### Concept
+
+Financial time series can exhibit complex temporal dependencies similar to coupled oscillator systems. This application:
+- Models portfolio returns as a multivariate dynamical system
+- Applies the clone method to compute Finite-Time Lyapunov Exponents (FTLEs)
+- Identifies systemic risk through positive Lyapunov exponents
+
+#### Key Features
+
+- **Data Sources**:
+  - Real financial data via `yfinance` API
+  - Synthetic VAR(1) data generator for testing
+  
+- **VAR Modeling**:
+  - Automatic lag order selection (AIC criterion)
+  - Multi-step ahead forecasting
+  
+- **Lyapunov Analysis**:
+  - Gram-Schmidt orthonormalization adapted for discrete-time systems
+  - Evolution of Maximum Lyapunov Exponent (MLE) over cycles
+  - Portfolio stability assessment
+
+#### Quick Start
+
+```bash
+cd FPUT_extra_applications/FPUT_finance
+pip install yfinance statsmodels pandas
+python Finance_FPUT_project.py
+```
+
+**Configuration**:
+```python
+# Edit these parameters in the script
+tickers = ['AAPL', 'GOOGL', 'MSFT', 'AMZN', 'JPM']
+start_date = '2020-01-01'
+end_date = '2024-01-01'
+perturbation_of_ic = 1e-3
+T_cycle = 5  # Days per cycle
+num_cycles = 200
+```
+
+**Interpretation**:
+- **MLE > 0**: System exhibits chaotic behavior (high sensitivity to initial conditions → systemic risk)
+- **MLE ≈ 0**: Neutral stability
+- **MLE < 0**: Stable dynamics (perturbations decay)
+
+#### Example Results
+
+The `Financial_Lyapunov_Results/` directory contains sample outputs showing:
+- Time evolution of individual Lyapunov exponents for each asset
+- Maximum LE highlighting periods of portfolio instability
+- CSV data for further analysis
+
+**Limitations**:
+- Financial markets have non-stationary dynamics (VAR assumes stationarity)
+- External shocks not captured by internal dynamics
+- Should be used as an exploratory tool, not for actual trading decisions
+
+---
+
+### 🌊 FPUT Waves Visualization (Godot Engine)
+
+**Location**: `FPUT_extra_applications/FPUT_waves/`
+
+An interactive 3D visualization of the FPUT lattice as a wave medium, built with Godot 4.2.
+
+#### Concept
+
+The FPUT chain can be visualized as a 1D elastic medium where particles' displacements create wave-like patterns. This Godot project provides:
+- Real-time integration of FPUT equations
+- GPU shader-based rendering of wave heights and velocities
+- Interactive perturbation via mouse clicks
+- Toggle between linear and nonlinear regimes
+
+#### Features
+
+**Physics Engine** (`mesh_instance3D.gd`):
+- Symplectic Euler integration
+- 128-point chain (configurable)
+- Support for α-FPUT (quadratic) and β-FPUT (cubic) nonlinearities
+- Fixed boundary conditions
+
+**Visualization** (`wave_sh.gdshader`):
+- Vertex displacement based on particle positions
+- Color mapping: blue (slow) → red (fast) based on velocities
+- Smooth interpolation across mesh
+
+**Interaction**:
+- **Spacebar**: Toggle linear ↔ nonlinear dynamics
+- **Left Click**: Apply localized impulse at clicked position
+
+#### Quick Start
+
+1. **Install Godot 4.2+**: Download from [godotengine.org](https://godotengine.org/)
+
+2. **Open Project**:
+   ```bash
+   cd FPUT_extra_applications/FPUT_waves
+   # Open Godot, then: Project → Import → Select project.godot
+   ```
+
+3. **Run**: Press F5 or click the "Play" button
+
+4. **Experiment**:
+   - Click on the wave to create pulses
+   - Press Space to see how nonlinearity affects wave propagation
+   - Observe recurrence phenomena (energy returns to initial modes)
+
+#### Configuration
+
+Edit parameters in the Godot Inspector when selecting `MeshInstance3D`:
+
+```gdscript
+N = 128                      # Chain length
+alpha_non_linear = 1.0       # Quadratic coefficient (when active)
+beta_non_linear = 0.25       # Cubic coefficient (when active)
+dt = 0.1                     # Integration timestep
+elastic_constant = 1.0       # Linear spring constant
+impulse_strength = 3.0       # Click force magnitude
+initial_impulse = 1.0        # Starting perturbation at center
+```
+
+#### Files Description
+
+| File | Purpose |
+|------|---------|
+| `main.tscn` | Main scene with camera, lighting, mesh |
+| `mesh_instance3D.gd` | FPUT integration logic |
+| `wave_sh.gdshader` | GPU vertex/fragment shader |
+| `project.godot` | Godot project configuration |
+
+#### Physics Implementation
+
+The force calculation follows the FPUT formulation:
+
+```gdscript
+for i in range(1, N-1):
+    dx1 = x[i+1] - x[i]      # Right neighbor distance
+    dx2 = x[i] - x[i-1]      # Left neighbor distance
+    a[i] = K·(dx1 - dx2)                    # Linear (harmonic)
+         + α·(dx1² - dx2²)                  # Quadratic (α-FPUT)
+         + β·(dx1³ - dx2³)                  # Cubic (β-FPUT)
+```
+
+**Shader Pipeline**:
+1. GDScript updates `x[]` and `v[]` arrays every frame
+2. Arrays passed to shader as `uniform float` arrays
+3. Vertex shader displaces mesh points in Z-direction
+4. Fragment shader computes color based on velocity magnitude
+
+#### Educational Use
+
+This visualization is ideal for:
+- Demonstrating energy equipartition vs. recurrence
+- Showing soliton formation in nonlinear regime
+- Comparing linear superposition with nonlinear interactions
+- Classroom demonstrations of Hamiltonian dynamics
+
+**Suggested Experiments**:
+1. **Recurrence**: Start with single-mode excitation (click once, center), observe energy return
+2. **Solitons**: Switch to nonlinear mode, create localized pulse, watch it propagate
+3. **Chaos onset**: Increase β, create multiple pulses, observe irregular motion
+
+---
+
+### Notes on Extended Applications
+
+These applications are **experimental demonstrations** and not part of the core research framework. They illustrate:
+- **Cross-domain applicability**: FPUT concepts extend beyond lattice physics
+- **Pedagogical value**: Visual and real-world examples aid understanding
+- **Methodological transfer**: Lyapunov analysis, symplectic integration apply broadly
+
+**Citation**: When using these applications in academic work, cite the main framework and specify which application was used.
+
+**Contributions**: We welcome community contributions of additional FPUT-inspired applications! See [Contributing](#) guidelines.
+
+---
+
 ## ⚙️ Advanced Configuration
 
 ### Custom Initial Conditions
