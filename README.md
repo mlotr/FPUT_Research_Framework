@@ -4,7 +4,7 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![DOI](https://img.shields.io/badge/DOI-10.1016%2Fj.jcp.2025.113456-blue.svg)](https://doi.org/10.1016/j.physd.2025.134813)
 
-A comprehensive computational framework for the analysis of the **Fermi-Pasta-Ulam-Tsingou (FPUT) nonlinear lattice system**, featuring symplectic integration, normal form transformations, and Lyapunov exponent calculations.
+A comprehensive computational framework for the analysis of the **Fermi-Pasta-Ulam-Tsingou (FPUT) nonlinear system**, featuring symplectic integration, normal form transformations, and Lyapunov exponent calculations.
 
 ---
 
@@ -77,7 +77,7 @@ The framework has been developed as part of doctoral research at University Coll
 
 - **Matteo Lotriglia** - University College Dublin (UCD)
   - Doctoral Researcher, School of Mathematics and Statistics
-  - GitHub: [@mlot](https://github.com/mlot)
+  - GitHub: [@mlotr](https://github.com/mlotr)
   - Email: matteo.lotriglia@ucdconnect.ie
 
 - **Dr. Tiziana Comito** - UCD
