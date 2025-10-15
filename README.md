@@ -82,9 +82,11 @@ The framework has been developed as part of doctoral research at University Coll
 
 - **Dr. Tiziana Comito** - UCD
   - Specialist in Hamiltonian Systems
+  - GitHub: [@Phy-Flux](https://github.com/Phy-Flux)
 
 - **Prof. Miguel D. Bustamante** - UCD
   - Thesis Supervisor
+  - Personal UCD Page: https://people.ucd.ie/miguel.bustamante
 
 ---
 
