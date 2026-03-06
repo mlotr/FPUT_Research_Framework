@@ -1,129 +1,26 @@
+
 """
-Created on Wed Jun 18 14:03:32 2025
+FPUT Research Framework
+=======================
 
-@author: matteolotriglia
- """
- 
-# import numpy as np
-# import matplotlib.pyplot as plt
-# from scipy.fft import fft, fftfreq
+Script: test_FPUT_recurrence_LE
 
-# # Impostazioni di stile per i grafici
-# plt.style.use('seaborn-v0_8-whitegrid')
-# plt.rcParams.update({'font.size': 12, 'figure.figsize': (14, 5)})
+Performs spectral analysis of recurrence phenomena in the
+Fermi–Pasta–Ulam–Tsingou system by comparing the Fourier
+spectra of modal energies and Lyapunov exponent evolution.
 
-# # --- Funzione Ausiliaria Interna ---
-# def _calculate_modal_energies(q_trajectory, p_trajectory, N):
-#     """Calcola l'energia di ogni modo normale per ogni passo temporale."""
-#     num_steps = len(q_trajectory)
-#     all_mode_energies = np.zeros((num_steps, N))
-    
-#     # Frequenze angolari dei modi normali (assumendo K=m=1)
-#     k = np.arange(N)
-#     w_k = np.abs(2 * np.sin(np.pi * k / N))
+The goal is to investigate possible relations between
+recurrence dynamics and chaotic indicators.
 
-#     for i, (q, p) in enumerate(zip(q_trajectory, p_trajectory)):
-#         Q_modes = fft(q) / N
-#         P_modes = fft(p) / N
-#         energies = 0.5 * (w_k**2 * np.abs(Q_modes)**2 + np.abs(P_modes)**2)
-#         all_mode_energies[i, :] = energies
-        
-#     return all_mode_energies
+Project README:
+https://github.com/mlotr/FPUT_Research_Framework
 
-# # --- Funzione Principale da Chiamare ---
-# def analyze_fput_recurrence(Lyap_spectrum, N, alpha, beta, dt, T_cycle, 
-#                               q_trajectory=None, p_trajectory=None, num_modes_to_plot=4):
-#     """
-#     Esegue un'analisi spettrale (FFT) per confrontare la periodicità degli 
-#     esponenti di Lyapunov e delle energie modali del sistema FPU-T.
-    
-#     Questa versione sostituisce l'analisi di ricorrenza con un'analisi in frequenza.
-#     L'output principale è un grafico. I valori di ritorno sono mantenuti per 
-#     compatibilità con lo script chiamante.
-    
-#     Args:
-#         Lyap_spectrum (list): Serie temporali degli esponenti di Lyapunov.
-#         N (int): Numero di particelle.
-#         alpha, beta (float): Parametri del modello FPU (non usati in questa analisi).
-#         dt (float): Passo di integrazione della simulazione.
-#         T_cycle (float): Intervallo di tempo tra i calcoli di Lyapunov.
-#         q_trajectory (list): Traiettoria delle posizioni.
-#         p_trajectory (list): Traiettoria dei momenti.
-#         num_modes_to_plot (int): Numero di modi/esponenti da visualizzare.
-#     """
-#     print("\n=== ESECUZIONE ANALISI SPETTRALE SEMPLIFICATA (FFT) ===")
+File descriptions:
+https://github.com/mlotr/FPUT_Research_Framework#-file-descriptions
 
-#     # Controlla se i dati necessari sono presenti
-#     if q_trajectory is None or p_trajectory is None:
-#         print("Errore: Dati di traiettoria (q, p) non forniti. Impossibile continuare.")
-#         return {}, {}, None
-
-#     # 1. Calcola la serie temporale delle energie modali
-#     modal_energies_t = _calculate_modal_energies(q_trajectory, p_trajectory, N)
-
-#     # 2. Determina quanti grafici creare e imposta la figura
-#     num_comparisons = min(num_modes_to_plot, len(Lyap_spectrum), N // 2)
-#     if num_comparisons == 0:
-#         print("Dati insufficienti per generare i grafici.")
-#         return {}, {}, None
-
-#     fig, axes = plt.subplots(num_comparisons, 1, figsize=(14, 4 * num_comparisons), sharex=True)
-#     if num_comparisons == 1:
-#         axes = [axes] # Rende 'axes' sempre iterabile
-
-#     # 3. Itera su ogni modo, calcola le FFT e disegna i grafici
-#     for i in range(num_comparisons):
-#         k = i + 1  # I modi normali sono indicizzati da 1
-#         ax = axes[i]
-
-#         # --- FFT per l'esponente di Lyapunov ---
-#         lyap_signal = np.array(Lyap_spectrum[i])
-        
-#         if np.mean(lyap_signal) < 1e-9: # Ignora esponenti che convergono a zero/negativi
-#             ax.set_title(f"Esponente $\\lambda_{k}$ trascurabile. Analisi saltata.")
-#             continue
-            
-#         N_lyap = len(lyap_signal)
-#         yf_lyap = fft(lyap_signal)
-#         xf_lyap = fftfreq(N_lyap, T_cycle)[:N_lyap // 2]
-#         mag_lyap = 2.0 / N_lyap * np.abs(yf_lyap[0:N_lyap // 2])
-        
-#         ax.plot(xf_lyap, mag_lyap, color='red', lw=2, label=f'Spettro Esponente $\\lambda_{k}$')
-
-#         # --- FFT per l'Energia del Modo ---
-#         energy_signal = modal_energies_t[:, k]
-#         N_energy = len(energy_signal)
-#         yf_energy = fft(energy_signal)
-#         xf_energy = fftfreq(N_energy, dt)[:N_energy // 2]
-#         mag_energy = 2.0 / N_energy * np.abs(yf_energy[0:N_energy // 2])
-        
-#         ax.plot(xf_energy, mag_energy, color='blue', alpha=0.8, label=f'Spettro Energia Modo {k}')
-        
-#         # --- Formattazione del Grafico ---
-#         ax.set_title(f"Confronto Spettri FFT: Esponente $\\lambda_{k}$ vs Energia Modo {k}")
-#         ax.set_ylabel("Ampiezza")
-#         ax.legend()
-#         ax.set_yscale('log')
-#         ax.grid(True, which='both', linestyle='--', linewidth=0.5)
-
-#     # 4. Finalizza e mostra il grafico
-#     axes[-1].set_xlabel("Frequenza [1 / unità di tempo]")
-#     plt.suptitle("Confronto Spettri di Frequenza: Lyapunov vs. Energie Modali", fontsize=16, y=1.02)
-#     plt.tight_layout()
-#     plt.show()
-
-#     # 5. Restituisci valori vuoti per mantenere la compatibilità con lo script principale
-#     print("======================================================")
-    
-#     # Lo script principale si aspetta 3 valori di ritorno.
-#     # Dato che l'output di questa analisi è il grafico, restituiamo valori vuoti.
-#     lyap_results_placeholder = {}
-#     energy_results_placeholder = {}
-#     analyzer_placeholder = None
-    
-#     return lyap_results_placeholder, energy_results_placeholder, analyzer_placeholder
-
-###################################
+Author: Matteo Lotriglia
+Institution: University College Dublin
+"""
 
 import numpy as np
 import matplotlib.pyplot as plt
