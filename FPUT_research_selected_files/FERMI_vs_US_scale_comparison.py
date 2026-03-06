@@ -1,7 +1,25 @@
-"""
-Created on Thu Mar  6 10:45:17 2025
 
-@author: matteolotriglia
+"""
+FPUT Research Framework
+=======================
+
+Script: FERMI_vs_US_scale_comparison
+
+Performs a comparative numerical study between the classical
+Fermi formulation of the FPUT problem and the formulation
+used in this research framework.
+
+The analysis investigates differences in scaling conventions,
+normal mode definitions, and modal energy evolution.
+
+Project README:
+https://github.com/mlotr/FPUT_Research_Framework
+
+File descriptions:
+https://github.com/mlotr/FPUT_Research_Framework#-file-descriptions
+
+Author: Matteo Lotriglia
+Institution: University College Dublin
 """
 
 import numpy as np
