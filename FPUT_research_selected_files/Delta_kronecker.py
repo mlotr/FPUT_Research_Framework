@@ -9,14 +9,11 @@ Generates generalized Kronecker delta tensors used to identify
 wavenumber and frequency resonance conditions in the
 Fermi–Pasta–Ulam–Tsingou (FPUT) nonlinear lattice.
 
-These tensors are required for the construction of higher-order
-interaction kernels used in normal form transformations.
-
-Full project documentation:
+Project README:
 https://github.com/mlotr/FPUT_Research_Framework
 
-See README section:
-https://github.com/mlotr/FPUT_Research_Framework#file-descriptions
+File descriptions:
+https://github.com/mlotr/FPUT_Research_Framework#-file-descriptions
 
 Author: Tiziana Comito
 Institution: University College Dublin
