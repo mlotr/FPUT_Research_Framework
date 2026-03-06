@@ -1,3 +1,31 @@
+
+"""
+FPUT Research Framework
+=======================
+
+Module: OPT_tensors_calculator_v02
+
+Computes interaction tensors required for the normal form
+representation of the Fermi–Pasta–Ulam–Tsingou Hamiltonian.
+
+The script generates higher–order interaction tensors used
+in perturbative expansions and canonical transformations
+of the nonlinear lattice dynamics.
+
+The tensors are stored in sparse format in order to reduce
+memory usage and allow efficient reuse in numerical
+simulations.
+
+Project README:
+https://github.com/mlotr/FPUT_Research_Framework
+
+File descriptions:
+https://github.com/mlotr/FPUT_Research_Framework#-file-descriptions
+
+Author: Matteo Lotriglia
+Institution: University College Dublin
+"""
+
 import numpy as np
 import warnings
 from sortedcontainers import SortedDict  # Sorting dic
@@ -25,15 +53,6 @@ def w_fun(k):
     '''
     global K, m, N
     omega = 2 * np.sqrt(K / m) * np.abs(np.sin(pi * (k) / N))
-    # omega =2*np.sqrt(K/m)*np.sin(pi*(k)/N)
-    # omega = np.round(omega,15)
-    
-    # Alternative version
-    # omega = []
-    # for mod in range(0, N):
-    #     omega.append(2 * np.abs(np.sin((mod + 1) * np.pi / N)))
-
-    # omega = np.array(omega)
 
     return (omega)
 
