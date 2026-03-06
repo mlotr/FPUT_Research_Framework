@@ -1,4 +1,30 @@
 
+"""
+FPUT Research Framework
+=======================
+
+Script: LE_with_pure_sympl_q_evolution
+
+Main simulation script used to compute the Lyapunov spectrum
+of the Fermi–Pasta–Ulam–Tsingou nonlinear lattice.
+
+The system can be evolved either in physical coordinates
+(q, p) using a symplectic integrator or in normal mode
+coordinates using precomputed interaction tensors.
+
+Lyapunov exponents are computed using the clone method
+combined with periodic Gram–Schmidt orthonormalization.
+
+Project README:
+https://github.com/mlotr/FPUT_Research_Framework
+
+File descriptions:
+https://github.com/mlotr/FPUT_Research_Framework#-file-descriptions
+
+Author: Matteo Lotriglia
+Institution: University College Dublin
+"""
+
 import numpy as np
 from scipy.fftpack import fft, ifft
 import time
