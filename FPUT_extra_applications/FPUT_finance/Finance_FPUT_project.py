@@ -1,7 +1,39 @@
-"""
-Created on Fri Aug  8 10:10:31 2025
 
-@author: matteolotriglia
+"""
+FPUT Research Framework
+=======================
+
+Module: Financial_Lyapunov_Analysis (Extra)
+
+Demonstration script applying nonlinear dynamics tools to
+financial time series.
+
+The script constructs a multivariate time series using either:
+- real market data downloaded via Yahoo Finance, or
+- synthetic correlated data generated from a stable VAR process.
+
+A Vector Autoregression (VAR) model is fitted to the data and
+used as an empirical dynamical system. The system is then evolved
+forward in time to estimate the full Lyapunov spectrum using
+a standard perturbation–orthogonalization procedure.
+
+This provides a practical illustration of how concepts from
+nonlinear dynamical systems — such as Lyapunov exponents and
+sensitivity to initial conditions — can be applied to
+financial markets to investigate systemic instability and
+chaotic behavior.
+
+NOTE:
+This script is included as an exploratory example and is not
+part of the core FPUT lattice analysis modules.
+
+Full project documentation:
+https://github.com/mlotr/FPUT_Research_Framework
+
+See README section:
+https://github.com/mlotr/FPUT_Research_Framework#-file-descriptions
+
+Author: Matteo Lotriglia
 """
 
 import numpy as np
